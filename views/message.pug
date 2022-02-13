@@ -1,0 +1,12 @@
+extends base
+
+block content
+    div.block.block-message
+        h1= title
+        h2 Share the link:
+        textarea= url
+
+    script.
+        document.querySelector("textarea").select();
+        
+        

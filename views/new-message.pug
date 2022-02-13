@@ -1,0 +1,10 @@
+extends base
+
+block content
+    div.block.block-new-message
+        h1= title
+
+        div
+            form(action="/message" method="POST")
+                textarea#message(type="text" name="message" placeholder="my first secret message" required)
+                button#submit Create link
