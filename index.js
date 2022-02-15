@@ -16,7 +16,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 let encrypted = "";
 let decrypted = "";
-const port = 3100;
+const port = process.env.PORT || 3100;
 
 
 app.get("/", (req, res) => {
