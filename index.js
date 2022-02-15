@@ -1,8 +1,13 @@
 const path = require("path");
 const cors = require("cors");
 const express = require("express");
+const {Buffer} = require("buffer");
+const compression = require("compression");
+const helmet = require("helmet");
 
 const app = express();
+app.use(compression());
+app.use(helmet());
 app.use(cors());
 
 app.use(express.static("public"));
@@ -25,10 +30,12 @@ app.get("/new-message", (req, res) => {
 });
 
 app.use("/message", (req, res, next) => {  
-    encrypted = btoa(req.body.message);
-    decrypted = atob(encrypted);
+    encrypted = Buffer.from(req.body.message).toString("base64");
+    decrypted = Buffer.from(encrypted, 'base64').toString();
     next();
 });
+
+
 
 app.post("/message", (req, res) => {
     res.status(201).render("message", {
